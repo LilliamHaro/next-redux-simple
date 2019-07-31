@@ -1299,13 +1299,15 @@ function (_App) {
 /*!******************************!*\
   !*** ./redux/actionTypes.js ***!
   \******************************/
-/*! exports provided: CHANGE_MODO */
+/*! exports provided: CHANGE_MODO, CHANGE_NAME */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CHANGE_MODO", function() { return CHANGE_MODO; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CHANGE_NAME", function() { return CHANGE_NAME; });
 var CHANGE_MODO = 'CHANGE_MODO';
+var CHANGE_NAME = 'CHANGE_NAME';
 
 /***/ }),
 
@@ -1325,7 +1327,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var initialState = {
   modo: "dia",
-  modoTitle: 'dia'
+  modoTitle: 'dia',
+  name: 'Li'
 };
 
 function rootReducer() {
@@ -1336,6 +1339,12 @@ function rootReducer() {
     return _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
       modo: state.modo === 'dia' ? state.modo = 'noche' : state.modo = 'dia',
       modoTitle: state.modoTitle === 'dia' ? state.modoTitle = 'noche' : state.modoTitle = 'dia'
+    });
+  }
+
+  if (action.type === _actionTypes__WEBPACK_IMPORTED_MODULE_1__["CHANGE_NAME"]) {
+    return _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_0___default()({}, state, {
+      name: action.payload
     });
   }
 

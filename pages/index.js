@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { changeModo } from '../redux/actions';
+import { changeModo,changeName } from '../redux/actions';
+import Nav from '../components/nav';
 
 const mapStateToProps = state => {
   return {
@@ -11,7 +12,8 @@ const mapStateToProps = state => {
 
 function mapDispatchToProps(dispatch) {
   return {
-    changeModo: modo => dispatch(changeModo())
+    changeModo: modo => dispatch(changeModo()),
+    changeName: name => dispatch(changeName(name))
   }
 }
 
@@ -20,7 +22,12 @@ function mapDispatchToProps(dispatch) {
 class IndexConnected extends Component {
   constructor(){
     super();
+    this.state = {
+      name: ""
+    }
     this.changingModo = this.changingModo.bind(this)
+    this.typing = this.typing.bind(this)
+
   }
 
   changingModo() {
@@ -28,20 +35,29 @@ class IndexConnected extends Component {
     console.log(this.props.modoTitle)
     this.props.changeModo()
   }
+  typing(e){
+    const name = e.target.name;
+    const value = e.target.value;
+
+    this.setState({
+      [name]:value
+    },function(){
+      let nameToStore = this.state.name
+      this.props.changeName(nameToStore)
+    })
+  }
+
+
 
   render () {
     return (
     <div>
-      {
-        console.log('dd',this.props.modo)
-      }
-
-      {
-        console.log('dds',this.props.modoTitle)
-      }
+     <Nav/>
       INDEX {this.props.modo}
       <br/>
       <button onClick={this.changingModo}>{this.props.modoTitle}</button>
+
+      <input name="name" onChange={this.typing} value={this.state.name} type="text"/>
     </div>
       )
   }
